@@ -1,0 +1,18 @@
+[
+	{
+		"MAC" : "98:D3:31:60:05:C0",
+		"Application" : "jserial",
+		"Interpreter" : "java",
+		"Name" : "KAMMCE-BLUE-1",
+		"Description" : "Device to test routing (KubeART) system",
+		"Device" : "/dev/rfcomm0"
+	},
+	{
+		"MAC" : "98:D3:31:60:04:C1",
+		"Application" : "pserial.py",
+		"Interpreter" : "python",
+		"Name" : "KAMMCE-BLUE-0",
+		"Description" : "Device to test routing (KubeART) system",
+		"Device" : "/dev/rfcomm1"
+	}
+]
