@@ -90,7 +90,7 @@ void Encrypter::crypt(char * msg) {
 }
 */
 
-SCEMainframeCommunicator::SCEMainframeCommunicator(SoftwareSerial * serial, void (*function_ptr)(char *)) {
+STARC::STARC(SoftwareSerial * serial, void (*function_ptr)(char *)) {
 	read_pos = 0;
 	read_start = false;
 	for(int i = 0; i < 256; ++i) {
@@ -103,7 +103,7 @@ SCEMainframeCommunicator::SCEMainframeCommunicator(SoftwareSerial * serial, void
 	blue->begin(9600);
 	//encrypter.generateNewStream("TEST");
 }
-void SCEMainframeCommunicator::send(char type, const char * fmt, ...) {
+void STARC::send(char type, const char * fmt, ...) {
 	if(fmt[0] == ACK && type == LOG) {
 	    sprintf(write_buffer,"%c%c%c", STX, ACK, ETX);
 	    Serial.print(write_buffer);
@@ -123,13 +123,13 @@ void SCEMainframeCommunicator::send(char type, const char * fmt, ...) {
     Serial.println(write_buffer);
 }
 
-void SCEMainframeCommunicator::clearString() {
+void STARC::clearString() {
 	for(int i = 0; i < 256; ++i) {
 		read_buffer[i] = 0;
 	}
 	read_pos = 0;
 }
-uint8_t SCEMainframeCommunicator::append(char c) {
+uint8_t STARC::append(char c) {
 	if(c == STX && read_start) {
 		clearString();
 		read_start = false;
@@ -155,22 +155,22 @@ uint8_t SCEMainframeCommunicator::append(char c) {
 	read_buffer[read_pos++] = c;
 	return 1;
 }
-boolean SCEMainframeCommunicator::find(char * c_str) {
+boolean STARC::find(char * c_str) {
 	if(strstr(read_buffer, c_str) != 0) {
 		return true;
 	}
 	return false;
 }
-boolean SCEMainframeCommunicator::update() {
+boolean STARC::update() {
 	if (blue->available()) {
 		char input = blue->read();
 		append(input);
 	}
 }
 
-boolean SCEMainframeCommunicator::isConnected() {
+boolean STARC::isConnected() {
 	return connected;
 };
-void SCEMainframeCommunicator::setCallback(void (*function_ptr)(char *)) {
+void STARC::setCallback(void (*function_ptr)(char *)) {
 	callback = function_ptr;
 };

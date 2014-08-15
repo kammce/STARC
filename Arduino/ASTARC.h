@@ -28,7 +28,7 @@ boolean strfind(char * haystack, char * needle);
 int indexOf(char * haystack, char * needle);
 boolean iscontrolchar(char c);
 
-class SCEMainframeCommunicator
+class STARC
 {
 private:
 	// Communication Object
@@ -42,7 +42,7 @@ private:
 	// Callback Function Pointer
 	void (*callback)(char *);
 public:
-	SCEMainframeCommunicator(SoftwareSerial * serial, void (*function_ptr)(char *));
+	STARC(SoftwareSerial * serial, void (*function_ptr)(char *));
 	boolean append(char c);
 	boolean find(char * c_str);
 	void clearString();

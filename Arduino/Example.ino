@@ -24,7 +24,7 @@ Time current_time = {0,0};
 Time arm_time     = {0,0};
 Time disarm_time  = {0,0};
 
-SCEMainframeCommunicator com(&SoftSerial, &serverFeedback);
+STARC com(&SoftSerial, &serverFeedback);
 
 void setup()
 {
